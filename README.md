@@ -30,7 +30,7 @@ If you want to see the ***original author's code***, please refer to this [link]
 
           return Concatenation(layers_split)            
 ```
-* Cardinality means how many times you want to split.
+* ***Cardinality*** means how many times you want to split.
 
 ### What is the "transform" ?
 ```python
