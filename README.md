@@ -24,5 +24,8 @@ If you want to see the ***original author's code***, please refer to this [link]
 ## Related works
 * [DenseNet](https://github.com/taki0112/Densenet-Tensorflow)
 
+## References
+* [Classification Datasets Results](http://rodrigob.github.io/are_we_there_yet/build/classification_datasets_results.html)
+
 ## Author
 Junho Kim
