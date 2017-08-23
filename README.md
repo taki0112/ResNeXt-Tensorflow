@@ -6,7 +6,7 @@ If you want to see the ***original author's code***, please refer to this [link]
 ## Requirements
 * Tensorflow 1.x
 * Python 3.x
-* tflearn (If you are easy to use ***global average pooling***, you should install ***tflearn***
+* tflearn (If you are easy to use ***global average pooling***, you should install ***tflearn***)
 
 ## Compare Architecture
 ### ResNet
