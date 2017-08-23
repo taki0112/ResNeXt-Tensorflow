@@ -18,6 +18,44 @@ If you want to see the ***original author's code***, please refer to this [link]
 * I implemented (b) 
 * (b) is ***split + transform(bottleneck) + concatenate + transition + merge***
 
+## Issue
+### What is the "split" ?
+```python
+  def split_layer(self, input_x, stride, layer_name):
+      with tf.name_scope(layer_name) :
+          layers_split = list()
+          for i in range(cardinality) :
+              splits = self.transform_layer(input_x, stride=stride, scope=layer_name + '_splitN_' + str(i))
+              layers_split.append(splits)
+
+          return Concatenation(layers_split)            
+```
+* Cardinality means how many times you want to split.
+
+### What is the "transform" ?
+```python
+  def transform_layer(self, x, stride, scope):
+      with tf.name_scope(scope) :
+          x = conv_layer(x, filter=depth, kernel=[1,1], stride=1, layer_name=scope+'_conv1')
+          x = Batch_Normalization(x, training=self.training, scope=scope+'_batch1')
+          x = Relu(x)
+
+          x = conv_layer(x, filter=depth, kernel=[3,3], stride=stride, layer_name=scope+'_conv2')
+          x = Batch_Normalization(x, training=self.training, scope=scope+'_batch2')
+          x = Relu(x)
+          return x
+```
+
+### What is the "transition" ?
+```python
+  def transition_layer(self, x, out_dim, scope):
+      with tf.name_scope(scope):
+          x = conv_layer(x, filter=out_dim, kernel=[1,1], stride=1, layer_name=scope+'_conv1')
+          x = Batch_Normalization(x, training=self.training, scope=scope+'_batch1')
+
+          return x
+````
+
 ## Comapre Results (ResNet, DenseNet, ResNeXt)
 ![compare](./assests/comparision.png)
 
