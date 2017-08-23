@@ -11,10 +11,13 @@ momentum = 0.9
 init_learning_rate = 0.1
 cardinality = 8 # how many split ?
 blocks = 3 # res_block ! (split + transition)
-# So, the total number of layers is (3*blokcs)*residual_layer_num + 2
-# because, blocks = split(conv 2) + transition(conv 1) = 3 layer
-# and, first conv layer 1, last dense layer 1
-# thus, total number of layers = (3*blocks)*residual_layer_num + 2
+
+"""
+So, the total number of layers is (3*blokcs)*residual_layer_num + 2
+because, blocks = split(conv 2) + transition(conv 1) = 3 layer
+and, first conv layer 1, last dense layer 1
+thus, total number of layers = (3*blocks)*residual_layer_num + 2
+"""
 
 depth = 64 # out channel
 
