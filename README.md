@@ -36,11 +36,11 @@ If you want to see the ***original author's code***, please refer to this [link]
 ```python
   def transform_layer(self, x, stride, scope):
       with tf.name_scope(scope) :
-          x = conv_layer(x, filter=depth, kernel=[1,1], stride=1, layer_name=scope+'_conv1')
+          x = conv_layer(x, filter=depth, kernel=[1,1], stride=stride, layer_name=scope+'_conv1')
           x = Batch_Normalization(x, training=self.training, scope=scope+'_batch1')
           x = Relu(x)
 
-          x = conv_layer(x, filter=depth, kernel=[3,3], stride=stride, layer_name=scope+'_conv2')
+          x = conv_layer(x, filter=depth, kernel=[3,3], stride=1, layer_name=scope+'_conv2')
           x = Batch_Normalization(x, training=self.training, scope=scope+'_batch2')
           x = Relu(x)
           return x
