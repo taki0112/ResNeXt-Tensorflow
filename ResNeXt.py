@@ -1,6 +1,6 @@
 import tensorflow as tf
 from tflearn.layers.conv import global_avg_pool
-from tensorflow.contrib.layers import batch_norm
+from tensorflow.contrib.layers import batch_norm, flatten
 from tensorflow.contrib.framework import arg_scope
 from cifar10 import *
 import numpy as np
@@ -135,18 +135,18 @@ class ResNeXt():
 
     def residual_layer(self, input_x, out_dim, layer_num, res_block=blocks):
         # split + transform(bottleneck) + transition + merge
-        # input_dim = input_x.get_shape().as_list()[-1]
-        input_dim = int(np.shape(input_x)[-1])
-
-        if input_dim * 2 == out_dim :
-            flag = True
-            stride = 2
-            channel = input_dim // 2
-        else :
-            flag = False
-            stride = 1
 
         for i in range(res_block):
+            # input_dim = input_x.get_shape().as_list()[-1]
+            input_dim = int(np.shape(input_x)[-1])
+
+            if input_dim * 2 == out_dim:
+                flag = True
+                stride = 2
+                channel = input_dim // 2
+            else:
+                flag = False
+                stride = 1
             x = self.split_layer(input_x, stride=stride, layer_name='split_layer_'+layer_num+'_'+str(i))
             x = self.transition_layer(x, out_dim=out_dim, scope='trans_layer_'+layer_num+'_'+str(i))
 
@@ -156,7 +156,7 @@ class ResNeXt():
             else :
                 pad_input_x = input_x
 
-            x = Relu(x + pad_input_x)
+            input_x = Relu(x + pad_input_x)
 
         return x
 
@@ -171,9 +171,10 @@ class ResNeXt():
         x = self.residual_layer(x, out_dim=256, layer_num='3')
 
         x = Global_Average_Pooling(x)
+        x = flatten(x)
         x = Linear(x)
 
-        x = tf.reshape(x, [-1,10])
+        # x = tf.reshape(x, [-1,10])
         return x
 
 
