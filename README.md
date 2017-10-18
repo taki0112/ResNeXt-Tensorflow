@@ -8,6 +8,12 @@ If you want to see the ***original author's code***, please refer to this [link]
 * Python 3.x
 * tflearn (If you are easy to use ***global average pooling***, you should install ***tflearn***)
 
+## Issue
+* If not enough GPU memory, Please edit the code
+```python
+with tf.Session() as sess : NO
+with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as sess : OK
+```
 ## Compare Architecture
 ### ResNet
 ![ResNet](./assests/ResNet.JPG)
@@ -18,7 +24,7 @@ If you want to see the ***original author's code***, please refer to this [link]
 * I implemented (b) 
 * (b) is ***split + transform(bottleneck) + concatenate + transition + merge***
 
-## Issue
+## Idea
 ### What is the "split" ?
 ```python
   def split_layer(self, input_x, stride, layer_name):
