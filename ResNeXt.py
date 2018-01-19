@@ -158,7 +158,7 @@ class ResNeXt():
 
             input_x = Relu(x + pad_input_x)
 
-        return input_x
+        return input_x 
 
 
     def Build_ResNext(self, input_x):
