@@ -68,6 +68,7 @@ with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as sess : OK
 ## Related works
 * [DenseNet-Tensorflow](https://github.com/taki0112/Densenet-Tensorflow)
 * [SENet-Tensorflow](https://github.com/taki0112/SENet-Tensorflow)
+* [ResNet-Tensorflow](https://github.com/taki0112/ResNet-Tensorflow)
 
 ## References
 * [Classification Datasets Results](http://rodrigob.github.io/are_we_there_yet/build/classification_datasets_results.html)
